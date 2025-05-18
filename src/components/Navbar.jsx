@@ -14,9 +14,21 @@ const Navbar = () => {
 
   const showMenu = () => setMenu(!menu);
 
-  const handleSearch = (e) => {
+  // Real-time search on input change
+  const handleSearchInput = (e) => {
+    const value = e.target.value;
+    setPrompt(value);
+    if (value.trim()) {
+      navigate(`?search=${value}`);
+    } else {
+      navigate("/");
+    }
+  };
+
+  // Handle Enter key submission
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (prompt) {
+    if (prompt.trim()) {
       navigate(`?search=${prompt}`);
     } else {
       navigate("/");
@@ -31,7 +43,7 @@ const Navbar = () => {
 
       {path === "/" && (
         <form
-          onSubmit={handleSearch}
+          onSubmit={handleSearchSubmit}
           className="flex items-center justify-center space-x-2 bg-gray-800 rounded-full px-3 py-1"
         >
           <button
@@ -41,7 +53,7 @@ const Navbar = () => {
             <BsSearch />
           </button>
           <input
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={handleSearchInput}
             value={prompt}
             className="outline-none px-3 py-1 bg-transparent text-white placeholder-gray-400"
             placeholder="Search a post"
