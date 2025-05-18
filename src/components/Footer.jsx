@@ -76,7 +76,7 @@ const Footer = () => {
               href="mailto:uniblogroup7@gmail.com"
               className="bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent hover:from-pink-500 hover:via-cyan-500 hover:to-yellow-500 transition-colors font-semibold"
             >
-              contact us - uniblogroup7@gmail.com
+              contact us - uniblogroup12@gmail.com
             </a>
           </p>
         </div>
