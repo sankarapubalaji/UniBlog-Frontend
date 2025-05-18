@@ -1,35 +1,86 @@
 const Footer = () => {
   return (
     <>
-      <div className="mt-8 w-full bg-black px-8 md:px-[300px] py-8 flex md:flex-row flex-col items-start justify-between text-sm md:text-md space-y-4 md:space-y-0">
-        <div className="flex flex-col text-white">
-          <p className="hover:text-gray-400">Featured Blogs</p>
-          <p className="hover:text-gray-400">Most Viewed</p>
-          <p className="hover:text-gray-400">Readers Choice</p>
-        </div>
+      <style>{`
+        .bubble {
+          position: absolute;
+          border-radius: 50%;
+          opacity: 0.3;
+          animation: float 15s infinite;
+          pointer-events: none;
+        }
 
-        <div className="flex flex-col text-white">
-          <p className="hover:text-gray-400">Forum</p>
-          <p className="hover:text-gray-400">Support</p>
-          <p className="hover:text-gray-400">Recent Posts</p>
-        </div>
+        .bubble:nth-child(1) {
+          width: 40px;
+          height: 40px;
+          left: 10%;
+          animation-duration: 12s;
+          animation-delay: 0s;
+        }
 
-        <div className="flex flex-col text-white">
-          <p className="hover:text-gray-400">Privacy Policy</p>
-          <p className="hover:text-gray-400">About Us</p>
-          <p className="hover:text-gray-400">Terms & Conditions</p>
-          <p className="hover:text-gray-400">Terms of Service</p>
-        </div>
+        .bubble:nth-child(2) {
+          width: 60px;
+          height: 60px;
+          left: 30%;
+          animation-duration: 18s;
+          animation-delay: 2s;
+        }
 
-        <div className="flex flex-col text-white">
-          <p className="hover:text-gray-400">Facebook</p>
-          <p className="hover:text-gray-400">Instagram</p>
-          <p className="hover:text-gray-400">Twitter</p>
-          <p className="hover:text-gray-400">LinkedIn</p>
+        .bubble:nth-child(3) {
+          width: 30px;
+          height: 30px;
+          left: 50%;
+          animation-duration: 15s;
+          animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+          width: 50px;
+          height: 50px;
+          left: 70%;
+          animation-duration: 20s;
+          animation-delay: 6s;
+        }
+
+        @keyframes float {
+          0% {
+            transform: translateY(100%) scale(1);
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateY(-100%) scale(1.2);
+            opacity: 0.2;
+          }
+        }
+      `}</style>
+      <div className="mt-8 w-full bg-gradient-to-r from-gray-900 to-black px-8 py-8 text-center text-sm relative overflow-hidden">
+        {/* Bubble Elements */}
+        <div className="bubble bg-pink-400"></div>
+        <div className="bubble bg-cyan-400"></div>
+        <div className="bubble bg-yellow-400"></div>
+        <div className="bubble bg-purple-400"></div>
+
+        {/* Footer Content */}
+        <div className="relative z-10">
+          <p className="bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent font-semibold">
+            Designed by Group 12
+          </p>
+          <p className="bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent font-semibold">
+            All Rights Reserved
+          </p>
+          <p>
+            <a 
+              href="mailto:uniblogroup7@gmail.com" 
+              className="bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent hover:from-pink-500 hover:via-cyan-500 hover:to-yellow-500 transition-colors font-semibold"
+            >
+              contact us - uniblogroup7@gmail.com
+            </a>
+          </p>
         </div>
       </div>
-
-      <p className="py-2 pb-6 text-center text-white bg-black text-sm">All Rights Reserved @Blogopedia 2023 - 2024</p>
     </>
   )
 }

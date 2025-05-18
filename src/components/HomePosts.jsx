@@ -1,32 +1,35 @@
-/* eslint-disable react/prop-types */
-import {IF} from '../url'
+import { IF } from '../url';
 
-const HomePosts = ({post}) => {
+const HomePosts = ({ post }) => {
   return (
-    <div className="w-full flex mt-8 space-x-4">
-
-      {/* left */}
-      <div className="w-[35%] height-[200px] flex justify-center items-center">
-        <img src={IF+post.photo} alt="" className="h-full w-full object-cover" />
+    <div className="w-full flex flex-col p-4">
+      {/* Image */}
+      <div className="w-full h-[200px] mb-3">
+        <img
+          src={IF + post.photo}
+          alt={post.title}
+          className="h-full w-full object-cover rounded-lg"
+        />
       </div>
 
-      {/* right */}
-      <div className="flex flex-col w-[65%]">
-        <h1 className="text-xl font-bold mb-1 md:mb-2 md:text-2xl">
+      {/* Content */}
+      <div className="flex flex-col">
+        <h1 className="text-xl md:text-2xl font-bold text-white mb-2 hover:text-teal-500 transition-colors">
           {post.title}
         </h1>
-        <div className="flex mb-2 text-sm font-semibold text-gray-500 items-center justify-between md:mb-4">
+        <div className="flex mb-2 text-sm md:text-base font-semibold text-gray-200 items-center justify-between">
           <p>@{post.username}</p>
           <div className="flex space-x-2">
-            <p>{new Date(post.updatedAt).toString().slice(0,15)}</p>
-            <p>{new Date(post.updatedAt).toString().slice(16,24)}</p>
+            <p>{new Date(post.updatedAt).toString().slice(0, 15)}</p>
+            <p>{new Date(post.updatedAt).toString().slice(16, 24)}</p>
           </div>
         </div>
-        <p className="text-sm md:text-lg">{post.desc.slice(0,200) + " ...Read more"}</p>
+        <p className="text-sm md:text-base text-gray-300 leading-relaxed line-clamp-3">
+          {post.desc.slice(0, 150) + (post.desc.length > 150 ? " ...Read more" : "")}
+        </p>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default HomePosts
+export default HomePosts;

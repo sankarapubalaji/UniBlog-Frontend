@@ -1,46 +1,111 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { BsSearch } from 'react-icons/bs'
-import { FaBars } from 'react-icons/fa'
-import { useContext, useState } from 'react'
-import Menu from './Menu'
-import { UserContext } from '../context/UserContext'
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
+import { IoMenu } from "react-icons/io5";
+import { useContext, useState } from "react";
+import Menu from "./Menu";
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
-  const [menu, setMenu] = useState(false)
-  const [prompt, setPrompt] = useState('')
-  const navigate = useNavigate()
-  const path = useLocation().pathname
-  
-  const showMenu = () => {
-    setMenu(!menu)
-  }
-  
-  const {user} = useContext(UserContext)
+  const [menu, setMenu] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
+  const { user } = useContext(UserContext);
+
+  const showMenu = () => setMenu(!menu);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (prompt) {
+      navigate(`?search=${prompt}`);
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
-    <div className="flex items-center justify-between px-6 md:px-[200px] py-4">
-      <h1 className='text-lg md:text-xl font-extrabold'><Link to="/">Blogopedia</Link></h1>
+    <div className="sticky top-0 z-20 flex items-center justify-between px-6 md:px-[150px] py-4 bg-gradient-to-r from-gray-900 to-black shadow-lg relative">
+      <h1 className="text-lg md:text-xl font-extrabold text-white hover:text-teal-300 transition-colors">
+        <Link to="/">Uni Blog</Link>
+      </h1>
 
-      {path==="/" && <div className="flex items-center justify-center space-x-0">
-        <p onClick={()=> navigate(prompt ? "?search=" + prompt : navigate("/"))}className='cursor-pointer'><BsSearch /></p>
-        <input onChange={(e) => setPrompt(e.target.value)} className="outline-none px-3" placeholder='Search a post' type='text' />
-      </div>}
+      {path === "/" && (
+        <form
+          onSubmit={handleSearch}
+          className="flex items-center justify-center space-x-2 bg-gray-800 rounded-full px-3 py-1"
+        >
+          <button
+            type="submit"
+            className="cursor-pointer text-white hover:text-teal-300"
+          >
+            <BsSearch />
+          </button>
+          <input
+            onChange={(e) => setPrompt(e.target.value)}
+            value={prompt}
+            className="outline-none px-3 py-1 bg-transparent text-white placeholder-gray-400"
+            placeholder="Search a post"
+            type="text"
+          />
+        </form>
+      )}
 
-      <div className='hidden md:flex items-center justify-center space-x-2 md:space-x-4'>
-        {user ? <h3><Link to="/write">Write</Link></h3> : <h3><Link to="/login">Login</Link></h3>}
-
-        {user ? <div onClick={showMenu}>
-          {menu ? <Menu/> : ""}
-          <p className='cursor-pointer relative'><FaBars /></p> 
-          </div> : <h3><Link to="/register">Register</Link></h3>}
+      <div className="flex items-center justify-center space-x-2 md:space-x-4">
+        {user ? (
+          <>
+            <h3>
+              <Link
+                to="/write"
+                className="text-white hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
+              >
+                Create Blog
+              </Link>
+            </h3>
+            <div onClick={showMenu} className="relative">
+              <p className="cursor-pointer text-white hover:text-teal-300 text-xl">
+                <IoMenu />
+              </p>
+              {menu && (
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10">
+                  <Menu />
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <h3>
+              <Link
+                to="/login"
+                className="text-white hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
+              >
+                Login
+              </Link>
+            </h3>
+            <h3>
+              <Link
+                to="/register"
+                className="text-white hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
+              >
+                Register
+              </Link>
+            </h3>
+          </>
+        )}
       </div>
-      
-      <div onClick={showMenu} className='md:hidden text-lg'>
-        <p className='cursor-pointer relative'><FaBars /></p>
-        {menu ? <Menu/> : ""}
+
+      <div onClick={showMenu} className="md:hidden text-xl relative">
+        <p className="cursor-pointer text-white hover:text-teal-300">
+          <IoMenu />
+        </p>
+        {menu && (
+          <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10">
+            <Menu />
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -4,12 +4,16 @@ import { useContext } from "react"
 import { UserContext } from "../context/UserContext"
 import axios from "axios"
 
-const Comment = ({ c,post }) => {
-    const {user} = useContext(UserContext)
+const Comment = ({ c, post, setComments }) => {
+    const { user } = useContext(UserContext)
+
     const deleteComment = async (id) => {      
         try {
-            await axios.delete(URL + "/api/comments/" + id ,{withCredentials:true})
-            window.location.reload(true)
+            await axios.delete(URL + "/api/comments/" + id, { withCredentials: true })
+            // Update comments state instead of reloading
+            if (setComments) {
+                setComments((prev) => prev.filter(comment => comment._id !== id))
+            }
         } catch (err) {
             console.log(err)
         }
