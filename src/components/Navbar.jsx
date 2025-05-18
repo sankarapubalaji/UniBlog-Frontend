@@ -61,15 +61,20 @@ const Navbar = () => {
                 Create Blog
               </Link>
             </h3>
-            <div onClick={showMenu} className="relative">
-              <p className="cursor-pointer text-white hover:text-teal-300 text-xl">
-                <IoMenu />
-              </p>
-              {menu && (
-                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10">
-                  <Menu />
-                </div>
-              )}
+            <div className="flex items-center space-x-2 relative">
+              <span className="text-white font-medium hidden md:block">
+                {user.username}
+              </span>
+              <div onClick={showMenu} className="relative">
+                <p className="cursor-pointer text-white hover:text-teal-300 text-2xl">
+                  <IoMenu />
+                </p>
+                {menu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-10 border border-gray-700">
+                    <Menu />
+                  </div>
+                )}
+              </div>
             </div>
           </>
         ) : (
@@ -94,15 +99,21 @@ const Navbar = () => {
         )}
       </div>
 
-      <div onClick={showMenu} className="md:hidden text-xl relative">
-        <p className="cursor-pointer text-white hover:text-teal-300">
-          <IoMenu />
-        </p>
-        {menu && (
-          <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg z-10">
-            <Menu />
-          </div>
+      {/* Mobile Menu Toggle */}
+      <div className="md:hidden flex items-center space-x-2 relative">
+        {user && (
+          <span className="text-white font-medium text-sm">{user.username}</span>
         )}
+        <div onClick={showMenu}>
+          <p className="cursor-pointer text-white hover:text-teal-300 text-2xl">
+            <IoMenu />
+          </p>
+          {menu && (
+            <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-10 border border-gray-700">
+              <Menu />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

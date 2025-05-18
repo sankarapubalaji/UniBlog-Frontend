@@ -56,7 +56,7 @@ const Footer = () => {
           }
         }
       `}</style>
-      <div className="mt-8 w-full bg-gradient-to-r from-gray-900 to-black px-8 py-8 text-center text-sm relative overflow-hidden">
+      <footer className="w-full bg-gradient-to-r from-gray-900 to-black px-8 py-8 text-center text-sm relative overflow-hidden mt-auto">
         {/* Bubble Elements */}
         <div className="bubble bg-pink-400"></div>
         <div className="bubble bg-cyan-400"></div>
@@ -72,17 +72,17 @@ const Footer = () => {
             All Rights Reserved
           </p>
           <p>
-            <a 
-              href="mailto:uniblogroup7@gmail.com" 
+            <a
+              href="mailto:uniblogroup7@gmail.com"
               className="bg-gradient-to-r from-pink-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent hover:from-pink-500 hover:via-cyan-500 hover:to-yellow-500 transition-colors font-semibold"
             >
               contact us - uniblogroup7@gmail.com
             </a>
           </p>
         </div>
-      </div>
+      </footer>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
